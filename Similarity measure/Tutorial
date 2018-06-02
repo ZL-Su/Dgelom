@@ -1,5 +1,7 @@
 # Similarity Measure
-  This module includes several common similarity metric implementations. The distance metrics, such as L1 and L2, are used to evaluate the similarity of two feature vectors. The cross correlation metrics, such as ZNCC etc., are employed to measure the similarity of two patches. 
+  This module includes several common similarity metric implementations. The distance metrics, 
+  such as L1 and L2, are used to evaluate the similarity of two feature vectors. The cross 
+  correlation metrics, such as ZNCC etc., are employed to measure the similarity of two patches. 
   
   To be continued...
   
