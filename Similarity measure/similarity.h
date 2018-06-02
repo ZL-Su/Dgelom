@@ -1,7 +1,7 @@
 /***************************************************************************
 This file is part of Matrice, an effcient and elegant C++ library for SC.
       Copyright(C) 2018, Zhilong (Dgelom) Su (su-zl@seu.edu.cn), 
-		                   all rights reserved.
+		         All Rights Reserved.
 
 This program is free software : you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free
