@@ -139,6 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\Similarity measure\_similarity.inl" />
+    <None Include="..\support\arch\inl\_ixpacket.inl" />
+    <None Include="..\support\arch\Tutorial.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Similarity measure\genalgs.h" />
+    <ClInclude Include="..\Similarity measure\imageproc.hpp" />
+    <ClInclude Include="..\Similarity measure\similarity.h" />
+    <ClInclude Include="..\support\arch\inl\_ixdetails.hpp" />
+    <ClInclude Include="..\support\arch\inl\_ixops.hpp" />
+    <ClInclude Include="..\support\arch\ixpacket.h" />
+    <ClInclude Include="..\support\arch\_ixbase.h" />
+    <ClInclude Include="..\support\arch\_ixtraits.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

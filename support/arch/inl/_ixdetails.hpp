@@ -16,9 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 #pragma once
+#ifdef __HAS_MATRICE__
 #include "../../private/_expr_type_traits.h"
 #include "../../util/_macros.h"
-
+#endif
 #ifdef __AVX__
 #include <pmmintrin.h>
 #include <tmmintrin.h>

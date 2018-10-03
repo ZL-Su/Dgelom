@@ -1,5 +1,7 @@
 #pragma once
+#ifdef __HAS_MATRICE__
 #include "../../private/_expr_type_traits.h"
+#endif // __HAS_MATRICE__
 #ifdef __AVX__
 #include "../_ixtraits.hpp"
 #include "_ixdetails.hpp"

@@ -17,8 +17,10 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 #pragma once
 #include <initializer_list>
+#ifdef __HAS_MATRICE__
 #include "../util/_macros.h"
 #include "../util/genalgs.h"
+#endif
 #ifdef __AVX__
 #include "./inl/_ixops.hpp"
 MATRICE_ARCH_BEGIN

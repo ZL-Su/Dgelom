@@ -16,9 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 #pragma once
+#ifdef __AVX__
 #include "_ixbase.h"
 #include "./inl/_ixdetails.hpp"
-#ifdef __AVX__
 MATRICE_ARCH_BEGIN
 
 ///<brief>

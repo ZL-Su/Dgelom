@@ -1,6 +1,8 @@
 #pragma once
+#ifdef __HAS_MATRICE__
 #include "../private/_expr_type_traits.h"
 #include "../util/_macros.h"
+#endif
 #ifdef __AVX__
 #include <mmintrin.h>    //_m64
 #include <emmintrin.h>   //_m128
