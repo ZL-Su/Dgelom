@@ -18,6 +18,8 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 ****************************************************************************/
 #pragma once
 
+#ifdef __HAS_MATRICE__
+
 #include <type_traits>
 #include "../core/matrix.h"
 
@@ -91,3 +93,5 @@ private:
 };
 MATRICE_ALGS_END
 #include "../private/_similarity.inl"
+
+#endif

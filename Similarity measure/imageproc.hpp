@@ -18,13 +18,13 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 ****************************************************************************/
 #pragma once
 #include <type_traits>
-#ifndef MATRICE_HOST_FINL
-#define MATRICE_HOST_FINL __forceinline
-#endif
-namespace dgelom {
+#include <tuple>
+#include "../dgelom/macro_def.h"
+
+DGE_BEGIN
 
 template<typename _Pixty, typename = typename std::enable_if<std::is_arithmetic<_Pixty>::value>::type>
-void _Grayscale_stretch(_Pixty* Img, std::size_t rows, std::size_t cols)
+DGE_HOST_FINL void _Grayscale_stretch(_Pixty* Img, std::size_t rows, std::size_t cols)
 {
 	typedef _Pixty                         pixel_t;
 	typedef pixel_t*                      iterator;
@@ -44,17 +44,18 @@ void _Grayscale_stretch(_Pixty* Img, std::size_t rows, std::size_t cols)
 		*_Begin = pixel_t(_Scal * (*_Begin - _Min));
 }
 
-template<typename _Valty> MATRICE_HOST_FINL
-_Valty _Tidy_axis(_Valty x, int limx, int& x0, int& x1)
+// Usage: auto [x_begin, x_end, dx] = _Tidy_axis(x, max_x, x0, x1);
+template<typename _Valty> DGE_HOST_FINL
+std::tuple<int, int, _Valty> _Tidy_axis(_Valty x, int limx, int x0, int x1)
 {
 	const auto ix = static_cast<int>(x);
-	if (ix < 0) { x0 = x1 = 0; return _Valty(0); }
-	if (ix > limx - 2) { x0 = x1 = limx - 1; return _Valty(1); }
-	x0 = ix, x1 = ix + 1; return _Valty(x1 - x);
+	if (ix < 0) return std::make_tuple(0, 0, _Valty(0));
+	if (ix > limx - 2) return std::make_tuple(limx - 1, limx - 1, _Valty(1));
+	return std::make_tuple(ix, ix + 1, ix + 1 - x);
 }
 //_Imty - image type, _Gdty - matrix type; If they are user defined type, cols() and rows() methods should be implemented for accessing the number of column, and the number of row. In addition, operator()(size_t _Col, size_t _Row) is neccessary for accessing the element at position (_Col, _Row).
 //img - image, gx - gradient in x direction, gy - gradient in y direction, x[2] - coordinate of interpolation point for input, which will be overwritten by the interpolated gradients; return interpolated image intensity.
-template<typename _Imty, typename _Gdty, typename _Valty>
+template<typename _Imty, typename _Gdty, typename _Valty> DGE_HOST_FINL
 _Valty _Bilinear_interp(const _Imty& img, const _Gdty& gx, const _Gdty& gy, _Valty x[2])
 {
 	using Image_t = _Imty;
@@ -84,7 +85,7 @@ _Valty _Bilinear_interp(const _Imty& img, const _Gdty& gx, const _Gdty& gy, _Val
 
 // Value of k-th B-Spline basic function at t.
 template<typename _T, typename = std::enable_if_t<std::is_arithmetic_v<_T>>>
-MATRICE_HOST_FINL constexpr _T _Bspline_kernel(size_t k, _T t) {
+DGE_HOST_FINL constexpr _T _Bspline_kernel(size_t k, _T t) {
 	assert(0 <= t && t < 1);
 	assert(k < 4);
 
@@ -96,4 +97,5 @@ MATRICE_HOST_FINL constexpr _T _Bspline_kernel(size_t k, _T t) {
 	default: return 0;
 	}
 }
-}
+
+DGE_END

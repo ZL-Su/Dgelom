@@ -17,6 +17,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 #pragma once
 #include <algorithm>
+#ifdef __HAS_MATRICE__
 #include "../algs/similarity.h"
 #include "../arch/ixpacket.h"
 
@@ -95,3 +96,4 @@ T Metric_<metric_fn::ZNCC, T>::eval(const pointer _Othr) const
 	return (_Score/std::sqrt(_Option[1]*_Toption[1]));
 }
 MATRICE_ALGS_END
+#endif

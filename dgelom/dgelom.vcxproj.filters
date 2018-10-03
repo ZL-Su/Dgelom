@@ -25,6 +25,9 @@
     <Filter Include="Header Files\arch\inl">
       <UniqueIdentifier>{79ccfd4f-bc78-4cab-a13a-8dd7fc4cfd1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{f03ad2ff-60e0-4bfa-ae05-07dfc0e26d1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Similarity measure\_similarity.inl">
@@ -62,5 +65,13 @@
     <ClInclude Include="..\support\arch\inl\_ixops.hpp">
       <Filter>Header Files\arch\inl</Filter>
     </ClInclude>
+    <ClInclude Include="macro_def.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
