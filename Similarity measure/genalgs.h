@@ -17,6 +17,7 @@ this program. If not, see <http://www.gnu.org/licenses/>.
 ****************************************************************************/
 #pragma once
 #include<algorithm>
+#ifdef __HAS_MATRICE__
 #include "_macros.h"
 #include "../arch/ixpacket.h"
 
@@ -83,3 +84,4 @@ MATRICE_GLOBAL_INL auto reduce(_InIt _First, _InIt _Last, _Op _op)
 	return (_Ret);
 }
 _MATRICE_NAMESPACE_END
+#endif

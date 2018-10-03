@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\similarity">
+      <UniqueIdentifier>{2df42098-1580-45f9-825c-ef0df6c7512b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\arch">
+      <UniqueIdentifier>{f6eadb36-b6ad-49c5-9637-891beba227a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\leetcode">
+      <UniqueIdentifier>{8bab974c-c8c9-4741-8174-78632180f65d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\arch\inl">
+      <UniqueIdentifier>{79ccfd4f-bc78-4cab-a13a-8dd7fc4cfd1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{f03ad2ff-60e0-4bfa-ae05-07dfc0e26d1b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Similarity measure\_similarity.inl">
+      <Filter>Header Files\similarity</Filter>
+    </None>
+    <None Include="..\support\arch\Tutorial.md">
+      <Filter>Header Files\arch</Filter>
+    </None>
+    <None Include="..\support\arch\inl\_ixpacket.inl">
+      <Filter>Header Files\arch\inl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Similarity measure\genalgs.h">
+      <Filter>Header Files\similarity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Similarity measure\imageproc.hpp">
+      <Filter>Header Files\similarity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Similarity measure\similarity.h">
+      <Filter>Header Files\similarity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\support\arch\_ixbase.h">
+      <Filter>Header Files\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\support\arch\_ixtraits.hpp">
+      <Filter>Header Files\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\support\arch\ixpacket.h">
+      <Filter>Header Files\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\support\arch\inl\_ixdetails.hpp">
+      <Filter>Header Files\arch\inl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\support\arch\inl\_ixops.hpp">
+      <Filter>Header Files\arch\inl</Filter>
+    </ClInclude>
+    <ClInclude Include="macro_def.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
