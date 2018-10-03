@@ -83,6 +83,7 @@
     <None Include="..\support\arch\Tutorial.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\leetcode\solutions.h" />
     <ClInclude Include="..\Similarity measure\genalgs.h" />
     <ClInclude Include="..\Similarity measure\imageproc.hpp" />
     <ClInclude Include="..\Similarity measure\similarity.h" />
