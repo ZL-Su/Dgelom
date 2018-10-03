@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../leetcode/solutions.h"
 
 int main() try
 {
