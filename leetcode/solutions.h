@@ -1,8 +1,9 @@
 #pragma once
+#include <cctype>
 #include <vector>
 #include <algorithm>
 
-class Solution
+class Leetcode_solution
 {
 	struct ListNode {int val;ListNode *next;ListNode(int x) : val(x), next(nullptr) {}};
 public:
@@ -88,6 +89,40 @@ public:
 		}
 
 		return (_Ret > INT_MAX || _Ret < INT_MIN ? 0 : _Ret);
+	}
+
+	// Problem 8. String to Integer (atoi)
+	int myAtoi(std::string _Str) {
+		int _Ret = 0;
+		if (_Str.empty() || std::isalpha(*_Str.begin())) return _Ret;
+		
+		auto _It = _Str.begin();
+		for (; _It < _Str.end();) {
+			if (std::isspace(*_It)) ++_It;
+			else break;
+		}
+		if (std::isalpha(*_It)) return _Ret;
+
+		int _Sign = 1;
+		if (*_It == '+') ++_It;
+		else if (*_It == '-') {
+			_Sign = -1;
+			++_It;
+		}
+		if (!std::isdigit(*_It)) return _Ret;
+
+		int _Temp;
+		for (; _It < _Str.end(); ++_It) {
+			auto _Cval = *_It;
+			if (std::isdigit(_Cval)) {
+				_Temp = _Ret;
+				_Ret = _Ret * 10 + *_It - '0';
+				if (_Ret < 0 || _Temp != (_Ret - (*_It - '0')) / 10)
+					return _Sign == 1 ? INT_MAX : INT_MIN;
+			}
+			else break;
+		}
+		return _Ret * _Sign;
 	}
 
 private:
