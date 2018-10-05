@@ -125,6 +125,36 @@ public:
 		return _Ret * _Sign;
 	}
 
+	// \Problem 9. Palindrome Number
+	bool isPalindrome(int x) {
+		if (x < 0) return false;
+		if (x < 10) return true;
+
+		int _Temp = x, _Pali = 0;
+		while (_Temp) {
+			auto _Single = _Temp % 10;
+			_Pali = _Pali * 10 + _Single;
+			_Temp = (_Temp - _Single)/10;
+		}
+
+		return (_Pali == x ? true : false);
+	}
+
+	// \Problem 11. Container With Most Water [O(n^2)]
+	int maxArea(std::vector<int>& height) {
+		const auto& _H = height;
+		if (_H.size() < 2) return 0;
+
+		int _Max_area = 0;
+		for (auto _It = _H.begin(); _It < _H.end(); ++_It) {
+			for (auto _Pos = _It + 1; _Pos < _H.end(); ++_Pos) {
+				auto _Area = std::min(*_It, *_Pos)*std::distance(_It, _Pos);
+				_Max_area = _Max_area > _Area ? _Max_area : _Area;
+			}
+		}
+		return _Max_area;
+	}
+
 private:
 	template<class Iter>
 	void _Merge_sort(Iter first, Iter last)
