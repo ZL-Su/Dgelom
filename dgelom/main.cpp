@@ -6,8 +6,9 @@ int main() try
 	// \leetcode solutions
 	Leetcode_solution _Lcsol;
 
-	std::string _Str = "2147483648";
-	auto _Res = _Lcsol.myAtoi(_Str);
+	std::vector<int> _H{ 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+
+	auto _Res = _Lcsol.maxArea(_H);
 
 
 	system("pause");
