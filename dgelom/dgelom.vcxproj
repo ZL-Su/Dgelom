@@ -92,6 +92,7 @@
     <ClInclude Include="..\support\arch\ixpacket.h" />
     <ClInclude Include="..\support\arch\_ixbase.h" />
     <ClInclude Include="..\support\arch\_ixtraits.hpp" />
+    <ClInclude Include="..\utils\string_to_other.h" />
     <ClInclude Include="macro_def.h" />
   </ItemGroup>
   <ItemGroup>

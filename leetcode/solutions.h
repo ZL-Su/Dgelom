@@ -144,14 +144,18 @@ public:
 	int maxArea(std::vector<int>& height) {
 		const auto& _H = height;
 		if (_H.size() < 2) return 0;
-
 		int _Max_area = 0;
+
+		// Solu 1: bruteforce method
 		for (auto _It = _H.begin(); _It < _H.end(); ++_It) {
 			for (auto _Pos = _It + 1; _Pos < _H.end(); ++_Pos) {
 				auto _Area = std::min(*_It, *_Pos)*std::distance(_It, _Pos);
 				_Max_area = _Max_area > _Area ? _Max_area : _Area;
 			}
 		}
+
+		// Solu 2:
+
 		return _Max_area;
 	}
 
