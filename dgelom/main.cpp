@@ -1,15 +1,16 @@
 #include <iostream>
+#include <array>
 #include "../leetcode/solutions.h"
+#include "../utils/copy.h"
 
 int main() try
 {
 	// \leetcode solutions
 	Leetcode_solution _Lcsol;
 
-	std::vector<int> _H{ 1, 8, 6, 2, 5, 4, 8, 3, 7 };
-
-	auto _Res = _Lcsol.maxArea(_H);
-
+	float* _F2d[3];
+	dgelom::_New_n<3 - 1>::op(_F2d, 10);
+	dgelom::_New_n<3 - 1>::del(_F2d);
 
 	system("pause");
 	return 0;
