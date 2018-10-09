@@ -172,6 +172,33 @@ public:
 		return _Max_area;
 	}
 
+	// \Problem 14. Longest Common Prefix
+	std::string longestCommonPrefix(std::vector<std::string>& strs) {
+		if (strs.empty()) return "";
+		if (strs.size() == 1) return strs.front();
+
+		std::string _Ret = "";
+		bool _Is_common = false;
+		std::size_t _Idx = 0;
+		do {
+			const auto _Test_val = strs.front()[_Idx];
+			for (auto _It = strs.begin() + 1; _It != strs.end(); ++_It) {
+				if (_Idx < _It->length()) {
+					_Is_common = _Test_val == (*_It)[_Idx];
+				}
+				else return _Ret;
+				if (!_Is_common) break;
+			}
+			if (_Is_common) {
+				_Idx++;
+				_Ret += _Test_val;
+			}
+			if (_Idx >= strs.front().length()) break;
+		} while (_Is_common);
+
+		return std::forward<decltype(_Ret)>(_Ret);
+	}
+
 private:
 	template<class Iter>
 	void _Merge_sort(Iter first, Iter last)

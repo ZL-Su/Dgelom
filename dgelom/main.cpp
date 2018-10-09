@@ -37,16 +37,10 @@ TPL_TY bool is_pointer(_Ty *x) { return true; }
 
 int main() try
 {
-	const auto _Val = 0;
-	auto _Ret = is_pointer(_Val);
-	_Ret = is_pointer(&_Val);
-	
 	// \leetcode solutions
 	Leetcode_solution _Lcsol;
-
-	float* _F2d[3];
-	dgelom::_New_n<3 - 1>::op(_F2d, 10);
-	dgelom::_New_n<3 - 1>::del(_F2d);
+	std::vector<std::string> _Strs = { "c","acc","ccc" };
+	auto _Prefix = _Lcsol.longestCommonPrefix(_Strs);
 
 	system("pause");
 	return 0;
