@@ -16,23 +16,21 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #include "../dgelom/macro_def.h"
 
 DGE_BEGIN
-template<std::size_t _N>
-struct _copy_n {
+template<std::size_t _N> struct _copy_n {
 	template<typename _Ty> inline static
 	void op(_Ty _Dst[], const _Ty& _Src, std::size_t _Pos) {
 		_Dst[_N][_Pos] = (_Src[_Pos]);
 		_copy_n<_N - 1>::op(_Dst, _Src, _Pos);
 	}
 };
-
-template<>
-struct _copy_n<0> {
+template<> struct _copy_n<0> {
 	template<typename _Ty> inline static 
 	void op(_Ty _Dst[], const _Ty& _Src, std::size_t _Pos) {
 		_Dst[0][_Pos] = _Src[_Pos];
 	}
 };
 
+// \recursively create a 2D block with fix rows: _Ty* _Data[_N]
 template<std::size_t _N> struct _New_n
 {
 	template<typename _Ty> static

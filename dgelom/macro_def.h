@@ -34,4 +34,13 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #define DGE_HOST_FINL __forceinline
 #endif // !DGE_HOST_FINL
 
+#ifndef const_auto_exp
+#define const_auto_exp constexpr auto
+#endif
+
+#ifndef TPL_TY
+#define TPL_TY template<typename _Ty>
+#endif // !TEMPLATE_TY
+
+
 
