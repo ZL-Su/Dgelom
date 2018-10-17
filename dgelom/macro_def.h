@@ -34,6 +34,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #define DGE_HOST_FINL __forceinline
 #endif // !DGE_HOST_FINL
 
+#ifndef DGE_NONHERITABLE
+#define DGE_NONHERITABLE final
+#endif // !NONHERITABLE
+
+
 #ifndef const_auto_exp
 #define const_auto_exp constexpr auto
 #endif
@@ -42,5 +47,5 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.
 #define TPL_TY template<typename _Ty>
 #endif // !TEMPLATE_TY
 
-
+#define __AVX__
 

@@ -16,55 +16,93 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>.
 **************************************************************************/
 #pragma once
-#ifdef __AVX__
 #include "_ixbase.h"
-#include "./inl/_ixdetails.hpp"
-MATRICE_ARCH_BEGIN
+#include "./inl/_ixop_impls.hpp"
+#ifdef __AVX__
+DGE_BEGIN
 
 ///<brief>
 // \template param: T is a scalar type, _Elems is the number of packed elements
 ///</brief>
 template<typename T, int _Elems>
-class Packet_ MATRICE_NONHERITABLE : public simd::simd_base_<T, _Elems>
+class Packet_ DGE_NONHERITABLE : public simd_base_<T, _Elems>
 {
-	using myt = Packet_;
-	using xbase_t = simd::simd_base_<T, _Elems>;
-	using op_t = details::impl::simd_op<T, _Elems>;
-	using internal_t = typename xbase_t::internal_t;
-	using initlist_t = typename xbase_t::initlist_t;
+	using Myt = Packet_;
+	using xbase_t = simd_base_<T, _Elems>;
+	using typename xbase_t::internal_t;
+	using typename xbase_t::initlist_t;
+	using typename xbase_t::op_t;
 	using xbase_t::m_data;
 public:
-	enum {size = _Elems};
+	enum {size = xbase_t::size};
 	using typename xbase_t::value_t;
-	using pointer = value_t*;
-	MATRICE_HOST_INL Packet_() noexcept : xbase_t() {}
-	MATRICE_HOST_INL Packet_(const value_t _arg) noexcept : xbase_t(_arg) {}
-	MATRICE_HOST_INL Packet_(const pointer _arg) noexcept : xbase_t(_arg) {}
-	MATRICE_HOST_INL Packet_(const initlist_t _arg) noexcept : xbase_t(pointer(_arg.begin())) {}
-	MATRICE_HOST_INL Packet_(const internal_t _arg) noexcept : xbase_t(_arg) {}
+	using pointer = std::add_pointer_t<value_t>;
 
-	MATRICE_HOST_INL auto& operator()() { return (m_data); }
-	MATRICE_HOST_INL const auto& operator()() const { return (m_data); }
-	MATRICE_HOST_INL myt& operator+ (const Packet_& _other);
-	MATRICE_HOST_INL myt& operator- (const Packet_& _other);
-	MATRICE_HOST_INL myt& operator* (const Packet_& _other);
-	MATRICE_HOST_INL myt& operator/ (const Packet_& _other);
-	MATRICE_HOST_INL myt  abs() const;
+	DGE_HOST_FINL Packet_() noexcept : xbase_t() {}
+	DGE_HOST_FINL Packet_(const value_t _arg) noexcept : xbase_t(_arg) {}
+	DGE_HOST_FINL Packet_(const pointer _arg) noexcept : xbase_t(_arg) {}
+	DGE_HOST_FINL Packet_(const initlist_t _arg) noexcept : xbase_t(pointer(_arg.begin())) {}
+	DGE_HOST_FINL Packet_(const internal_t _arg) noexcept : xbase_t(_arg) {}
+	template<typename _Fwdty, typename = std::enable_if_t<std::is_class_v<_Fwdty>>>
+	DGE_HOST_FINL Packet_(const _Fwdty& _arg) noexcept : xbase_t(_arg.data()) {}
 
-	template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>> friend 
-	MATRICE_HOST_FINL Packet operator+ (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
-	template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>> friend
-	MATRICE_HOST_FINL Packet operator- (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
-	template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>> friend
-	MATRICE_HOST_FINL Packet operator* (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
-	template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>> friend
-	MATRICE_HOST_FINL Packet operator/ (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
-	template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>> friend
-	MATRICE_HOST_FINL Packet abs(const Packet_<T, _Elems>& _Right);
-	template<typename T, int _Elems, typename = std::enable_if_t<std::is_arithmetic_v<T>>> friend
-	MATRICE_HOST_FINL T reduce(const Packet_<T, _Elems>& _Right);
+	DGE_HOST_FINL auto& operator()() { return (m_data); }
+	DGE_HOST_FINL const auto& operator()() const { return (m_data); }
+	DGE_HOST_FINL Myt& operator+ (const Packet_& _other);
+	DGE_HOST_FINL Myt& operator- (const Packet_& _other);
+	DGE_HOST_FINL Myt& operator* (const Packet_& _other);
+	DGE_HOST_FINL Myt& operator/ (const Packet_& _other);
+	DGE_HOST_FINL Myt  abs() const;
+
+	template<typename T, int _Elems, typename Packet> friend
+	DGE_HOST_FINL Packet abs(const Packet_<T, _Elems>& _Right);
+	template<typename T, int _Elems, typename> friend
+	DGE_HOST_FINL T reduce(const Packet_<T, _Elems>& _Right);
 };
 
-#include "./inl/_ixpacket.inl"
-MATRICE_ARCH_END
+#pragma region <!-- operators -->
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator+ (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator- (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator* (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator/ (const Packet_<T, _Elems>& _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator+ (const Packet_<T, _Elems>& _Left, T _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator- (const Packet_<T, _Elems>& _Left, T _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator* (const Packet_<T, _Elems>& _Left, T _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator/ (const Packet_<T, _Elems>& _Left, T _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator+ (T _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator- (T _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator* (T _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator/ (T _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator+ (const Packet_<T, _Elems>& _Left, T* _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator- (const Packet_<T, _Elems>& _Left, T* _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator* (const Packet_<T, _Elems>& _Left, T* _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator/ (const Packet_<T, _Elems>& _Left, T* _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator+ (T* _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator- (T* _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator* (T* _Left, const Packet_<T, _Elems>& _Right);
+template<typename T, int _Elems, typename Packet = Packet_<T, _Elems>>
+DGE_HOST_FINL Packet operator/ (T* _Left, const Packet_<T, _Elems>& _Right);
+#pragma endregion
+
+DGE_END
 #endif
+#include "./inl/_ixpacket.inl"
