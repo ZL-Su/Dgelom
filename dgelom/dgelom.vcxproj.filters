@@ -59,9 +59,6 @@
     <ClInclude Include="..\support\arch\ixpacket.h">
       <Filter>Header Files\arch</Filter>
     </ClInclude>
-    <ClInclude Include="..\support\arch\inl\_ixdetails.hpp">
-      <Filter>Header Files\arch\inl</Filter>
-    </ClInclude>
     <ClInclude Include="..\support\arch\inl\_ixops.hpp">
       <Filter>Header Files\arch\inl</Filter>
     </ClInclude>
@@ -70,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="..\leetcode\solutions.h">
       <Filter>Header Files\leetcode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\copy.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\string_helper.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\support\arch\inl\_ixop_impls.hpp">
+      <Filter>Header Files\arch\inl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

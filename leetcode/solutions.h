@@ -1,3 +1,16 @@
+/**************************************************************************
+Copyright(C) 2018, Zhilong(Dgelom) Su, all rights reserved.
+This program is free software : you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at
+your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
 #pragma once
 #include <cctype>
 #include <vector>
@@ -144,15 +157,46 @@ public:
 	int maxArea(std::vector<int>& height) {
 		const auto& _H = height;
 		if (_H.size() < 2) return 0;
-
 		int _Max_area = 0;
+
+		// Solu 1: bruteforce method
 		for (auto _It = _H.begin(); _It < _H.end(); ++_It) {
 			for (auto _Pos = _It + 1; _Pos < _H.end(); ++_Pos) {
 				auto _Area = std::min(*_It, *_Pos)*std::distance(_It, _Pos);
 				_Max_area = _Max_area > _Area ? _Max_area : _Area;
 			}
 		}
+
+		// Solu 2:
+
 		return _Max_area;
+	}
+
+	// \Problem 14. Longest Common Prefix
+	std::string longestCommonPrefix(std::vector<std::string>& strs) {
+		if (strs.empty()) return "";
+		if (strs.size() == 1) return strs.front();
+
+		std::string _Ret = "";
+		bool _Is_common = false;
+		std::size_t _Idx = 0;
+		do {
+			const auto _Test_val = strs.front()[_Idx];
+			for (auto _It = strs.begin() + 1; _It != strs.end(); ++_It) {
+				if (_Idx < _It->length()) {
+					_Is_common = _Test_val == (*_It)[_Idx];
+				}
+				else return _Ret;
+				if (!_Is_common) break;
+			}
+			if (_Is_common) {
+				_Idx++;
+				_Ret += _Test_val;
+			}
+			if (_Idx >= strs.front().length()) break;
+		} while (_Is_common);
+
+		return std::forward<decltype(_Ret)>(_Ret);
 	}
 
 private:
