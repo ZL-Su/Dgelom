@@ -44,14 +44,14 @@ DGE_HOST_FINL void _Grayscale_stretch(_Pixty* Img, std::size_t rows, std::size_t
 		*_Begin = pixel_t(_Scal * (*_Begin - _Min));
 }
 
-// Usage: auto [x_begin, x_end, dx] = _Tidy_axis(x, max_x, x0, x1);
+// Usage: auto [x_begin, x_end, dx] = _Tidy_axis(x, max_x);
 template<typename _Valty> DGE_HOST_FINL
-std::tuple<int, int, _Valty> _Tidy_axis(_Valty x, int limx, int x0, int x1)
+std::tuple<int, int, _Valty> _Tidy_axis(_Valty x, int limx)
 {
 	const auto ix = static_cast<int>(x);
-	if (ix < 0) return std::make_tuple(0, 0, _Valty(0));
-	if (ix > limx - 2) return std::make_tuple(limx - 1, limx - 1, _Valty(1));
-	return std::make_tuple(ix, ix + 1, ix + 1 - x);
+	if (ix < 0) return std::tie(0, 0, _Valty(0));
+	if (ix > limx - 2) return std::tie(limx - 1, limx - 1, _Valty(1));
+	return std::tie(ix, ix + 1, ix + 1 - x);
 }
 //_Imty - image type, _Gdty - matrix type; If they are user defined type, cols() and rows() methods should be implemented for accessing the number of column, and the number of row. In addition, operator()(size_t _Col, size_t _Row) is neccessary for accessing the element at position (_Col, _Row).
 //img - image, gx - gradient in x direction, gy - gradient in y direction, x[2] - coordinate of interpolation point for input, which will be overwritten by the interpolated gradients; return interpolated image intensity.
@@ -63,9 +63,9 @@ _Valty _Bilinear_interp(const _Imty& img, const _Gdty& gx, const _Gdty& gy, _Val
 	using pixel_t = typename Image_t::value_t;
 	using value_t = std::common_type_t<typename Matrx_t::value_t, _Valty>;
 
-	int x0, x1, y0, y1;
-	auto dx = _Tidy_axis(x[0], img.cols(), x0, x1);
-	auto dy = _Tidy_axis(x[1], img.rows(), y0, y1);
+	auto [x0, x1, dx] = _Tidy_axis(x[0], img.cols())
+	auto [y0, y1, dy] = _Tidy_axis(x[1], img.rows());
+
 	auto dxt = 1.0 - dx, dyt = 1.0 - dy;
 	auto _Interp = [&](auto _F11, auto _F12, auto _F21, auto _F22)->auto 
 	     { return dy * (dx*_F11 + dxt*_F12) + dyt*(dx*_F21 + dxt*_F22); };

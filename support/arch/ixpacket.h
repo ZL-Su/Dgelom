@@ -32,7 +32,7 @@ class Packet_ DGE_NONHERITABLE : public simd_base_<T, _Elems>
 	using typename xbase_t::internal_t;
 	using typename xbase_t::initlist_t;
 	using typename xbase_t::op_t;
-	using xbase_t::m_data;
+	using          xbase_t::m_data;
 public:
 	enum {size = xbase_t::size};
 	using typename xbase_t::value_t;
