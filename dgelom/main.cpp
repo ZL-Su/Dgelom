@@ -1,5 +1,7 @@
 #include <iostream>
 #include <array>
+#include <adept.h>
+#include <adept_source.h>
 #include "../leetcode/solutions.h"
 #include "../utils/copy.h"
 
@@ -48,6 +50,26 @@ template<> struct _Reduce_n<0> {
 	}
 };
 
+using adept::adouble;
+adouble afunc(const adouble x[2]) {
+	adouble y = 4.0;
+	adouble s = 2.*x[0] + 3.*x[1] * x[1];
+	y *= std::sin(s.value());
+	return y;
+}
+
+std::tuple<double, double, double> func_and_grad(const double x_val[2]) {
+	adept::Stack stack;
+	adouble x[2]{ x_val[0], x_val[1] };
+
+	stack.new_recording();
+	adouble y = afunc(x);
+	y.set_gradient(1.0);
+	stack.compute_adjoint();
+
+	return std::make_tuple(y.value(), x[0].get_gradient(), x[1].get_gradient());
+}
+
 int main() try
 {
 	// \leetcode solutions
@@ -55,9 +77,9 @@ int main() try
 	std::vector<std::string> _Strs = { "c","acc","ccc" };
 	auto _Prefix = _Lcsol.longestCommonPrefix(_Strs);
 
+	double x_val[] = { 0.5, 1.0 };
+	auto [y, dy_dx1, dy_dx2] = func_and_grad(x_val);
 
-	float _data[] = { 1, 2, 3 };
-	auto _Sum = _Reduce_n<2>::value(_data);
 
 	system("pause");
 	return 0;
