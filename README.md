@@ -2,7 +2,7 @@
 C++ codes for computer vision and numeric computation.
 
 ## 1. SIMD vectorization
-We have released a stand-alone SIMD vectorization library "dge-simd" in Dgelom/support/arch. It is a portable modern C++ library for accelarating C/C++ code on Intel CPU platform. The dge-simd is simple since it includes only on core type and a sequence of operators. The core type named ```dgelom::Packet_``` with interfance as:
+We have released a stand-alone SIMD vectorization library "dge-simd" in Dgelom/support/arch. It is a portable modern C++ library for accelarating C/C++ code on Intel CPU platform. The dge-simd is simple since it includes only on core type and a sequence of operators. The core type named ```dgelom::Packet_``` with interface as:
 
 ``` template<typename _Ty, int _Elems> class Packet_```;
 
